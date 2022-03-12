@@ -2,7 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.android.githubsearch">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
+        android:name=".utils.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -10,9 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GithubSearch">
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:exported="true"
-            android:label="@string/app_name"
             android:theme="@style/Theme.GithubSearch">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
