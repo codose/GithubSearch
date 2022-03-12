@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import androidx.paging.map
 import com.android.githubsearch.data.paging.SearchPagingSource
 import com.android.githubsearch.domain.mapper.SearchMapper
@@ -36,11 +37,12 @@ class SearchViewModel @Inject constructor(
         viewModelScope.launch(coroutineExceptionHandler) {
             Pager(PagingConfig(pageSize = Constants.NO_PER_PAGE)) {
                 SearchPagingSource(searchUserUseCase, query)
-            }.flow.collect {
-                _searchResult.value = it.map { domain ->
-                    searchMapper.mapToPresentation(domain)
+            }.flow.cachedIn(viewModelScope)
+                .collect {
+                    _searchResult.value = it.map { domain ->
+                        searchMapper.mapToPresentation(domain)
+                    }
                 }
-            }
         }
     }
 }
