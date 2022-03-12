@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# Copy to .git/hooks in the project root
+# E.g. cp pre-commit ../.git/hooks/ && chmod +x ../.git/hooks/pre-commit
+CHANGED_FILES="$(git --no-pager diff --name-status --no-color --cached | awk '$1 != "D" && $2 ~ /\.kts|\.kt/ { print $2}')"
+
+echo "Running ktlint..."
+./gradlew ktlintFormat
+
+RESULT=$?
+if [ $RESULT -ne 0 ]; then
+ echo "Ktlint error"
+ exit 1
+fi
+
+echo "Running detekt..."
+OUTPUT="/tmp/detekt-$(date +%s)"
+./gradlew detekt > $OUTPUT
+EXIT_CODE=$?
+if [ $EXIT_CODE -ne 0 ]; then
+  cat $OUTPUT
+  rm $OUTPUT
+  echo "***********************************************"
+  echo "                 Detekt failed                 "
+  echo " Please fix the above issues before committing "
+  echo "***********************************************"
+  exit $EXIT_CODE
+fi
+rm $OUTPUT
+
+echo "$CHANGED_FILES" | while read -r file; do
+  if [ -f $file ]; then
+    git add $file
+  fi
+done
+
+exit 0
