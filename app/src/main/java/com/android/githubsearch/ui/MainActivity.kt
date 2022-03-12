@@ -5,18 +5,13 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.android.githubsearch.ui.composable.ErrorPage
-import com.android.githubsearch.ui.composable.FullScreenProgress
-import com.android.githubsearch.ui.composable.IdleState
+import androidx.paging.compose.collectAsLazyPagingItems
 import com.android.githubsearch.ui.composable.SearchComponent
 import com.android.githubsearch.ui.composable.SearchList
 import com.android.githubsearch.ui.theme.GithubSearchTheme
@@ -30,9 +25,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             GithubSearchTheme {
                 val searchViewModel by viewModels<SearchViewModel>()
-
-                val viewState = searchViewModel.viewState.collectAsState()
-
+                val data = searchViewModel.searchResult.collectAsLazyPagingItems()
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier
@@ -44,23 +37,7 @@ class MainActivity : ComponentActivity() {
                         SearchComponent {
                             searchViewModel.searchUser(it)
                         }
-                        Spacer(modifier = Modifier.height(12.dp))
-                        when (viewState.value) {
-                            is SearchViewModel.ViewState.Data -> {
-                                val data = (viewState.value as SearchViewModel.ViewState.Data).data
-                                SearchList(searchResult = data)
-                            }
-                            is SearchViewModel.ViewState.Error -> {
-                                val errorMessage = (viewState.value as SearchViewModel.ViewState.Error).message
-                                ErrorPage(message = errorMessage)
-                            }
-                            SearchViewModel.ViewState.Idle -> {
-                                IdleState()
-                            }
-                            SearchViewModel.ViewState.Loading -> {
-                                FullScreenProgress()
-                            }
-                        }
+                        SearchList(searchResult = data)
                     }
                 }
             }

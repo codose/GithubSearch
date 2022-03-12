@@ -13,4 +13,5 @@ object Compose {
     const val navigation = "androidx.navigation:navigation-compose:${Navigation.navVersion}"
     const val composeUiTest = "androidx.compose.ui:ui-test-junit4:$composeVersion"
     const val coil = "io.coil-kt:coil-compose:1.3.1"
+    const val paging = "androidx.paging:paging-compose:1.0.0-alpha14"
 }

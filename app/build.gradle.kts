@@ -92,4 +92,5 @@ dependencies {
     implementation(Retrofit.logging)
 
     implementation(Compose.coil)
+    implementation(Compose.paging)
 }
