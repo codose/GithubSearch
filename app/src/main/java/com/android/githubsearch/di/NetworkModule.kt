@@ -1,6 +1,8 @@
 package com.android.githubsearch.di
 
+import androidx.paging.PagingConfig
 import com.android.githubsearch.data.api.GithubSearchApi
+import com.android.githubsearch.utils.Constants
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -58,6 +60,11 @@ class NetworkModule {
     @Singleton
     fun provideAPI(retrofit: Retrofit): GithubSearchApi {
         return retrofit.create(GithubSearchApi::class.java)
+    }
+
+    @Provides
+    fun providePagingConfig(): PagingConfig {
+        return PagingConfig(pageSize = Constants.NO_PER_PAGE)
     }
 
     companion object {

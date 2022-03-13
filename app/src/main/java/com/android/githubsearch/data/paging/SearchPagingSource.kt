@@ -2,22 +2,23 @@ package com.android.githubsearch.data.paging
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.android.githubsearch.domain.model.SearchDomain
-import com.android.githubsearch.domain.usecase.SearchUserUseCase
+import com.android.githubsearch.data.api.GithubSearchApi
+import com.android.githubsearch.data.model.SearchSchema
+import com.android.githubsearch.utils.Constants
 
 class SearchPagingSource(
-    private val searchUserUseCase: SearchUserUseCase,
-    private val query: String
-) : PagingSource<Int, SearchDomain>() {
+    private val searchApi: GithubSearchApi,
+    private val query: String,
+) : PagingSource<Int, SearchSchema>() {
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, SearchDomain> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, SearchSchema> {
         val currentPage = params.key ?: 1
         return try {
-            val items = searchUserUseCase.execute(query = query, page = currentPage)
-            val endOfPaginationReached = items.isEmpty()
+            val items = searchApi.searchUser(query = query, page = currentPage, perPage = Constants.NO_PER_PAGE)
+            val endOfPaginationReached = items.items.isEmpty()
             if (endOfPaginationReached.not()) {
                 LoadResult.Page(
-                    data = items,
+                    data = items.items,
                     prevKey = if (currentPage == 1) null else currentPage - 1,
                     nextKey = if (endOfPaginationReached) null else currentPage + 1
                 )
@@ -33,7 +34,7 @@ class SearchPagingSource(
         }
     }
 
-    override fun getRefreshKey(state: PagingState<Int, SearchDomain>): Int? {
+    override fun getRefreshKey(state: PagingState<Int, SearchSchema>): Int? {
         return state.anchorPosition
     }
 }

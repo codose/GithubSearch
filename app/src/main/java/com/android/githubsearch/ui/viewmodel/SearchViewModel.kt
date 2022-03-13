@@ -2,16 +2,12 @@ package com.android.githubsearch.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import androidx.paging.map
-import com.android.githubsearch.data.paging.SearchPagingSource
 import com.android.githubsearch.domain.mapper.SearchMapper
 import com.android.githubsearch.domain.usecase.SearchUserUseCase
 import com.android.githubsearch.ui.model.SearchItem
-import com.android.githubsearch.utils.Constants
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -35,9 +31,7 @@ class SearchViewModel @Inject constructor(
 
     fun searchUser(query: String) {
         viewModelScope.launch(coroutineExceptionHandler) {
-            Pager(PagingConfig(pageSize = Constants.NO_PER_PAGE)) {
-                SearchPagingSource(searchUserUseCase, query)
-            }.flow.cachedIn(viewModelScope)
+            searchUserUseCase.execute(query).cachedIn(viewModelScope)
                 .collect {
                     _searchResult.value = it.map { domain ->
                         searchMapper.mapToPresentation(domain)
