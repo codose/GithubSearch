@@ -31,11 +31,10 @@ class MainActivity : ComponentActivity() {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier
-                        .fillMaxSize()
-                        .padding(16.dp),
+                        .fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Column {
+                    Column(Modifier.padding(16.dp)) {
                         SearchComponent {
                             searchViewModel.searchUser(it)
                         }

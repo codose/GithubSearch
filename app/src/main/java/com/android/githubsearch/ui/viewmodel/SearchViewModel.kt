@@ -10,6 +10,7 @@ import com.android.githubsearch.domain.usecase.SearchUserUseCase
 import com.android.githubsearch.ui.model.SearchItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -31,6 +32,9 @@ class SearchViewModel @Inject constructor(
 
     fun searchUser(query: String) {
         viewModelScope.launch(coroutineExceptionHandler) {
+            _searchResult.value = PagingData.empty()
+            // Delay is necessary to reset the pagedlist before sending another request
+            delay(100L)
             searchUserUseCase.execute(query).cachedIn(viewModelScope)
                 .collect {
                     _searchResult.value = it.map { domain ->
