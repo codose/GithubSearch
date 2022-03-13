@@ -8,6 +8,7 @@ import io.mockk.coVerify
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.test.advanceTimeBy
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Rule
@@ -35,6 +36,9 @@ class SearchViewModelTest {
         } returns flowOf()
 
         sut.searchUser("query")
+
+        advanceTimeBy(300L)
+
         coVerify {
             searchUserUseCase.execute("query")
         }
