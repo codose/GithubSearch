@@ -9,6 +9,10 @@ plugins {
 android {
     compileSdk = 31
 
+    lint {
+        abortOnError = false
+    }
+
     testOptions {
         unitTests {
             isIncludeAndroidResources = true
