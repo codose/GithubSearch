@@ -4,7 +4,9 @@ plugins {
     kotlin(Plugins.kapt)
     id(Plugins.parcelize)
     id(Plugins.hilt)
+    id(Plugins.jacoco)
 }
+apply(from = "$rootDir/jacoco.gradle")
 
 android {
     compileSdk = 31
@@ -102,4 +104,8 @@ dependencies {
 
     implementation(Compose.coil)
     implementation(Compose.paging)
+}
+
+jacoco {
+    toolVersion = Build.jacocoVersion
 }

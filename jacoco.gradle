@@ -1,0 +1,14 @@
+android {
+    testOptions {
+        unitTests.all {
+            jacoco {
+                includeNoLocationClasses = true
+                excludes = ['jdk.internal.*']
+            }
+        }
+    }
+}
+
+jacocoAndroidUnitTestReport {
+    excludes += ['hilt_aggregated_deps/*','**/codegen/*','**/di/*', '**/*_HiltComponents*.*', '**/Hilt_*.*','**/*_Component*.*']
+}

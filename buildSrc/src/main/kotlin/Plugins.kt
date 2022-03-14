@@ -5,4 +5,5 @@ object Plugins {
     const val kapt = "kapt"
     const val parcelize = "kotlin-parcelize"
     const val ktlint = "org.jlleitschuh.gradle.ktlint"
+    const val jacoco = "com.dicedmelon.gradle.jacoco-android"
 }
