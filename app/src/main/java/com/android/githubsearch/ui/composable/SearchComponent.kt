@@ -26,6 +26,7 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -59,7 +60,7 @@ fun SearchComponent(onSearchClicked: (String) -> Unit) {
                         backgroundColor = Color.White
                     ),
                     onValueChange = { text.value = it },
-                    modifier = Modifier,
+                    modifier = Modifier.testTag("searchTextField"),
                     keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
                     keyboardActions = KeyboardActions(
                         onSearch = {
@@ -74,6 +75,7 @@ fun SearchComponent(onSearchClicked: (String) -> Unit) {
             Spacer(modifier = Modifier.width(12.dp))
             Card(shape = RoundedCornerShape(12.dp), elevation = 12.dp, backgroundColor = Blue) {
                 IconButton(
+                    modifier = Modifier.testTag("searchButton"),
                     onClick = {
                         keyboardController?.hide()
                         if (text.value.isNotBlank()) {

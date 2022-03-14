@@ -3,7 +3,7 @@ plugins {
 }
 
 buildscript {
-    apply(from = "githooks.gradle")
+    //apply(from = "githooks.gradle")
     repositories {
         gradlePluginPortal()
         google()
@@ -13,6 +13,7 @@ buildscript {
         classpath(Build.buildTools)
         classpath(Build.kotlinGradlePlugin)
         classpath(Build.hiltGradlePlugin)
+        classpath(Build.jacocoPlugin)
         classpath(Build.ktlintGradlePlugin)
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files

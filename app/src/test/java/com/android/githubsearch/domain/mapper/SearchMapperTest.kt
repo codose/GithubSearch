@@ -46,6 +46,7 @@ class SearchMapperTest {
     @Test
     fun `test domain mapping`() {
         val actualResult = sut.mapToPresentation(mockedSearchDomain)
+        assertEquals(mockedSearchItem.avatarUrl, actualResult.avatarUrl)
         assertEquals(mockedSearchItem, actualResult)
     }
 }

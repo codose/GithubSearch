@@ -25,6 +25,9 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        getByName("debug") {
+            isTestCoverageEnabled = true
+        }
         getByName("release") {
             isMinifyEnabled = false
         }
@@ -70,14 +73,16 @@ dependencies {
     implementation(Kotlin.coroutinesCore)
     implementation(Kotlin.coroutineReactive)
 
-    testImplementation(Test.coreTesting)
-    testImplementation(Test.core)
-    testImplementation(Test.coroutineTest)
-    testImplementation(Test.robolectric)
-    testImplementation(Test.mockk)
-    testImplementation(Test.extJUnit)
-    testImplementation(Test.espressoCore)
-    testImplementation(Test.junit)
+    testImplementation(Tests.coreTesting)
+    testImplementation(Tests.core)
+    testImplementation(Tests.coroutineTest)
+    testImplementation(Tests.robolectric)
+    testImplementation(Tests.mockk)
+    testImplementation(Tests.extJUnit)
+    testImplementation(Tests.espressoCore)
+    testImplementation(Tests.junit)
+    testImplementation(Tests.composeUiTest)
+    debugImplementation(Tests.composeDebugTest)
 
     // Hilt
     implementation(Hilt.hiltAndroid)

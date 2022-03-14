@@ -54,12 +54,6 @@ class SearchPagingSourceTest {
 
     private val mockSearchApi = mockk<GithubSearchApi>()
     lateinit var sut: SearchPagingSource
-    private val searchDomain = SearchDomain(
-        avatarUrl = "",
-        id = 0,
-        login = "",
-        type = ""
-    )
 
     @Before
     fun setup() {
