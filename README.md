@@ -68,3 +68,6 @@ android project project or run ./gradlew assembleDebug. Further notes can be fou
 
 ## Test Coverage
 ![Test Coverage](screenshots/img.png "Test Coverage")
+
+## Download Link
+[Download](https://github.com/codose/GithubSearch/suites/5658978927/artifacts/185352080)
