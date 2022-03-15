@@ -32,6 +32,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.android.githubsearch.ui.theme.Blue
 import com.android.githubsearch.ui.theme.LightBlue
+import com.android.githubsearch.utils.Constants.SEARCH_BUTTON_TEXT_TAG
+import com.android.githubsearch.utils.Constants.TEXT_FIELD_TEXT_TAG
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
@@ -57,10 +59,11 @@ fun SearchComponent(onSearchClicked: (String) -> Unit) {
                     colors = TextFieldDefaults.outlinedTextFieldColors(
                         focusedBorderColor = LightBlue,
                         unfocusedBorderColor = Color.Transparent,
-                        backgroundColor = Color.White
+                        backgroundColor = Color.White,
+                        textColor = Color.Black
                     ),
                     onValueChange = { text.value = it },
-                    modifier = Modifier.testTag("searchTextField"),
+                    modifier = Modifier.testTag(TEXT_FIELD_TEXT_TAG),
                     keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
                     keyboardActions = KeyboardActions(
                         onSearch = {
@@ -75,7 +78,7 @@ fun SearchComponent(onSearchClicked: (String) -> Unit) {
             Spacer(modifier = Modifier.width(12.dp))
             Card(shape = RoundedCornerShape(12.dp), elevation = 12.dp, backgroundColor = Blue) {
                 IconButton(
-                    modifier = Modifier.testTag("searchButton"),
+                    modifier = Modifier.testTag(SEARCH_BUTTON_TEXT_TAG),
                     onClick = {
                         keyboardController?.hide()
                         if (text.value.isNotBlank()) {

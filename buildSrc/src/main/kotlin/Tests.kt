@@ -23,4 +23,8 @@ object Tests {
     const val core = "androidx.test:core:1.4.0"
     const val composeUiTest = "androidx.compose.ui:ui-test-junit4:${Compose.composeVersion}"
     const val composeDebugTest = "androidx.compose.ui:ui-test-manifest:${Compose.composeVersion}"
+    const val hiltTesting = "com.google.dagger:hilt-android-testing:${Hilt.version}"
+    const val hiltCompiler = "com.google.dagger:hilt-android-compiler:${Hilt.version}"
+    const val mockWebServer = "com.squareup.okhttp3:mockwebserver:4.6.0"
+    const val idling = "com.jakewharton.espresso:okhttp3-idling-resource:1.0.0"
 }

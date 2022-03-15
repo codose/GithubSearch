@@ -19,18 +19,21 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
 import com.android.githubsearch.ui.model.SearchItem
+import com.android.githubsearch.utils.Constants.CARD_ITEM_TEXT_TAG
 
 @ExperimentalCoilApi
 @Composable
 fun SearchListItem(searchItem: SearchItem) {
     Card(
         modifier = Modifier
+            .testTag(CARD_ITEM_TEXT_TAG)
             .fillMaxWidth()
             .wrapContentHeight(),
         elevation = 8.dp,

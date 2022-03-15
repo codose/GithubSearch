@@ -2,7 +2,8 @@
 ## Features 🎨
 
 - **100% Kotlin-only project**.
--  Coroutine,Jetpack compose, Hilt,Flow, Paging 3, AndroidX,MVVM, JUnit tests.
+- Coroutine, Jetpack compose, Hilt, Flow, Paging 3, AndroidX,MVVM, JUnit tests, MockWebServer.
+- Jacoco Plugin to check test coverage
 - 100% Gradle Kotlin DSL setup.
 - Dependency versions managed via `buildSrc`.
 - CI Setup with GitHub Actions.
@@ -43,6 +44,16 @@ If we ever need to re-generate our baseline for detekt run:
 # Re-generate the baseline for Detekt
 ./gradlew detektBaseline
 ```
+
+## Test Coverage 🔍
+
+This project is using [**Jacoco**](https://github.com/arturdm/jacoco-android-gradle-plugin) to check test coverage. To generate the test coverage report you can run
+```bash
+# Generate test coverage report
+./gradlew jacocoTestDebugUnitTestReport
+```
+
+
 ## CI ⚙️
 
 There are currently the following workflows available:
@@ -54,3 +65,6 @@ android project project or run ./gradlew assembleDebug. Further notes can be fou
 
 ## Screenshots
 ![Screenshot 1](screenshots/1.png "Title")
+
+## Test Coverage
+![Test Coverage](screenshots/img.png "Test Coverage")

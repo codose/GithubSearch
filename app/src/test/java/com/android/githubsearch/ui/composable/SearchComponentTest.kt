@@ -6,6 +6,8 @@ import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performImeAction
 import androidx.compose.ui.test.performTextInput
 import com.android.githubsearch.ui.theme.GithubSearchTheme
+import com.android.githubsearch.utils.Constants.SEARCH_BUTTON_TEXT_TAG
+import com.android.githubsearch.utils.Constants.TEXT_FIELD_TEXT_TAG
 import org.junit.Assert.*
 import org.junit.Rule
 import org.junit.Test
@@ -29,8 +31,8 @@ class SearchComponentTest {
             }
         }
 
-        val textField = composeTestRule.onNodeWithTag("searchTextField")
-        val searchButton = composeTestRule.onNodeWithTag("searchButton")
+        val textField = composeTestRule.onNodeWithTag(TEXT_FIELD_TEXT_TAG)
+        val searchButton = composeTestRule.onNodeWithTag(SEARCH_BUTTON_TEXT_TAG)
         textField.performClick()
         textField.performTextInput(expectedQuery)
 
@@ -51,7 +53,7 @@ class SearchComponentTest {
             }
         }
 
-        val textField = composeTestRule.onNodeWithTag("searchTextField")
+        val textField = composeTestRule.onNodeWithTag(TEXT_FIELD_TEXT_TAG)
         textField.performClick()
         textField.performTextInput(expectedQuery)
         textField.performImeAction()
@@ -70,7 +72,7 @@ class SearchComponentTest {
             }
         }
 
-        val textField = composeTestRule.onNodeWithTag("searchTextField")
+        val textField = composeTestRule.onNodeWithTag(TEXT_FIELD_TEXT_TAG)
         textField.performClick()
         textField.performTextInput(query)
         textField.performImeAction()
@@ -89,8 +91,8 @@ class SearchComponentTest {
             }
         }
 
-        val textField = composeTestRule.onNodeWithTag("searchTextField")
-        val searchButton = composeTestRule.onNodeWithTag("searchButton")
+        val textField = composeTestRule.onNodeWithTag(TEXT_FIELD_TEXT_TAG)
+        val searchButton = composeTestRule.onNodeWithTag(SEARCH_BUTTON_TEXT_TAG)
         textField.performClick()
         textField.performTextInput(query)
 

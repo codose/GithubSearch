@@ -49,7 +49,7 @@ class SearchPagingSourceTest {
     private val mockedResponseSchema = SearchResponseSchema(
         incompleteResults = true,
         items = listOf(mockedSearchSchema, mockedSearchSchema, mockedSearchSchema),
-        totalCount = 2
+        totalCount = 28
     )
 
     private val mockSearchApi = mockk<GithubSearchApi>()

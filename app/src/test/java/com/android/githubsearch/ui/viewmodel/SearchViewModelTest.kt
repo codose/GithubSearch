@@ -1,6 +1,7 @@
 package com.android.githubsearch.ui.viewmodel
 
 import com.android.githubsearch.CoroutineTestRule
+import com.android.githubsearch.dispatchers.TestDispatcherProvider
 import com.android.githubsearch.domain.mapper.SearchMapper
 import com.android.githubsearch.domain.usecase.SearchUserUseCase
 import io.mockk.coEvery
@@ -23,10 +24,11 @@ class SearchViewModelTest {
     private lateinit var sut: SearchViewModel
     private val searchMapper = SearchMapper()
     private val searchUserUseCase = mockk<SearchUserUseCase>()
+    private val coroutineProvider = TestDispatcherProvider()
 
     @Before
     fun setUp() {
-        sut = SearchViewModel(searchMapper, searchUserUseCase)
+        sut = SearchViewModel(searchMapper, searchUserUseCase, coroutineProvider)
     }
 
     @Test

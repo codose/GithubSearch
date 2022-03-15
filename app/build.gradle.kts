@@ -28,12 +28,9 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.android.githubsearch.HiltTestRunner"
     }
     buildTypes {
-        getByName("debug") {
-            isTestCoverageEnabled = true
-        }
         getByName("release") {
             isMinifyEnabled = false
         }
@@ -88,6 +85,10 @@ dependencies {
     testImplementation(Tests.espressoCore)
     testImplementation(Tests.junit)
     testImplementation(Tests.composeUiTest)
+    testImplementation(Tests.hiltTesting)
+    testImplementation(Tests.mockWebServer)
+    testImplementation(Tests.idling)
+    kaptTest(Tests.hiltCompiler)
     debugImplementation(Tests.composeDebugTest)
 
     // Hilt
